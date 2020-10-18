@@ -4,118 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
     <style>
-      body {
+      * {
         margin: 0;
         padding: 0;
+        overflow: hidden;
       }
     </style>
   </head>
   <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
-    <script>
-      const Sprite = PIXI.Sprite,
-        Resources = PIXI.loader.resources,
-        Application = PIXI.Application,
-        Loader = PIXI.loader,
-        Container = PIXI.Container;
-      let member,
-        disCount,
-        free,
-        container,
-        message,
-        duration = 100;
-
-      const app = new Application({
-        antialias: true,
-      });
-      document.body.appendChild(app.view);
-      container = new Container();
-      app.renderer.backgroundColor = 0x0ffffff;
-      app.renderer.view.style.position = "absolute";
-      app.renderer.backgroundColor = 0xff4400;
-      app.renderer.autoResize = true;
-      app.renderer.resize(1240, 1500);
-      Loader.add("timg", "image/timg.jpg").load(setup);
-      function setup() {
-        member = new Sprite(Resources.timg.texture);
-        disCount = new Sprite(Resources.timg.texture);
-        free = new Sprite(Resources.timg.texture);
-        setCanvas([member, disCount, free]);
-      }
-      app.stage.addChild(container);
-      const canvas = document.querySelector("canvas");
-      canvas.addEventListener("touchstart", start);
-      canvas.addEventListener("touchmove", move);
-      canvas.addEventListener("touchend", end);
-
-      function setCanvas(spriteArr) {
-        for (let i = 0; i < spriteArr.length; i++) {
-          let sprite = spriteArr[i];
-          sprite.width = 40;
-          sprite.height = 40;
-          const position = getPosition();
-          sprite.position.set(position.x, position.y);
-          message = setText("会员积分兑换优惠");
-          message.x = position.x + 40;
-          message.y = position.y + 20;
-          container.addChild(sprite, message);
-        }
-      }
-
-      function getPosition() {
-        const maxWidth = window.screen.width;
-        const maxHeight = window.screen.height;
-        return {
-          x: Math.random() * (maxWidth - 60) + 20,
-          y: Math.random() * (maxHeight - 60) + 20,
-        };
-      }
-
-      function setText(text) {
-        const style = new PIXI.TextStyle({
-          fontSize: 12,
-          wordWrap: true,
-        });
-        return new PIXI.Text(text, style);
-      }
-      let startX, startY, startX1, startY1, moveX1, moveY1, moveX, moveY, changeX, changeY, touch;
-      function start(e) {
-        touch = e.changedTouches;
-        if (touch.length === 1) {
-          startX = touch[0].pageX;
-          startY = touch[0].pageY;
-        } else if (touch.length === 2) {
-          startX = touch[0].pageX;
-          startY = touch[0].pageY;
-          startX1 = touch[1].pageX;
-          startY1 = touch[1].pageY;
-        }
-      }
-      function move(e) {
-        touch = e.changedTouches;
-        if (touch.length === 1) {
-          moveX = touch[0].pageX;
-          moveY = touch[0].pageY;
-        } else if (touch.length === 2) {
-          moveX = touch[0].pageX;
-          moveY = touch[0].pageY;
-          moveX1 = touch[1].pageX;
-          moveY1 = touch[1].pageY;
-        }
-        changeX = (moveX - startX) * 0.02;
-        changeY = (moveY - startY) * 0.02;
-        if (changeX > 0) {
-          app.stage.x += changeX;
-          app.stage.y += changeY;
-        } else {
-          app.stage.x += changeX;
-          app.stage.y += changeY;
-        }
-      }
-      function end(e) {
-        app.stage.reset();
-      }
-    </script>
+    <script src="./js/index.js"></script>
   </body>
 </html>
